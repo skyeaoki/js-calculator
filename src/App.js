@@ -60,8 +60,12 @@ class App extends Component {
 
   onDigit = (e) => {
     const digit = e.target.innerHTML;
+
     this.setState(({ display, resetDisplay }) => ({
+      // If the display is 0 or has been reset, set display to digit
+      // Otherwise concatenate digit to the display
       display: resetDisplay || display === "0" ? digit : display.concat(digit),
+      // Do not reset display
       resetDisplay: false
     }));
   }
@@ -70,25 +74,33 @@ class App extends Component {
     const operator = e.target.innerHTML;
 
     this.setState(({ display, resetDisplay, operands, operators }) => ({
+      // If the display was not reset and isn't "-" then concatenate the current display to the operands array
       operands: !resetDisplay && display !== "-" ? operands.concat(display) : operands,
+      // If the display was not reset and isn't "-" rhwn concatenate the current operator to the operators array
       operators: !resetDisplay && display !== "-" ? operators.concat(operator) : [operator],
+      // Reset display
       resetDisplay: true
     }));
   }
 
   onSubtract = (e) => {
     this.setState(({ display, resetDisplay, operands, operators }) => {
-      // Subtract
+      // Subtract: If display was not reset or display is 0
       if (!resetDisplay || display === "0") {
         return {
+          // If the display was not reset and isn't "-" then concatenate the current display to the operands array
           operands: !resetDisplay && display !== "-" ? operands.concat(display) : operands,
+          // If the display was not reset concatenate '-' to the operators array
+          // Otherwise set operators to ["-"]
           operators: !resetDisplay ? operators.concat("-") : ["-"],
+          // Reset display
           resetDisplay: true
         }
-        // Negative Sign
+        // Otherwise act as a negative sign 
       } else {
         return {
           display: "-",
+          // Do not reset display
           resetDisplay: false
         }
       }
