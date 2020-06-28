@@ -66,18 +66,12 @@ class App extends Component {
     }));
   }
 
-  onDivide = () => {
-    this.setState(({ display, resetDisplay, operands, operators }) => ({
-      operands: !resetDisplay && display !== "-" ? operands.concat(display) : operands,
-      operators: !resetDisplay ? operators.concat("/") : ["/"],
-      resetDisplay: true
-    }));
-  }
+  onOperator = (e) => {
+    const operator = e.target.innerHTML;
 
-  onMultiply = () => {
     this.setState(({ display, resetDisplay, operands, operators }) => ({
       operands: !resetDisplay && display !== "-" ? operands.concat(display) : operands,
-      operators: !resetDisplay ? operators.concat("*") : ["*"],
+      operators: !resetDisplay && display !== "-" ? operators.concat(operator) : [operator],
       resetDisplay: true
     }));
   }
@@ -86,7 +80,6 @@ class App extends Component {
     this.setState(({ display, resetDisplay, operands, operators }) => {
       // Subtract
       if (!resetDisplay || display === "0") {
-        console.log(operators.length);
         return {
           operands: !resetDisplay && display !== "-" ? operands.concat(display) : operands,
           operators: !resetDisplay ? operators.concat("-") : ["-"],
@@ -100,14 +93,6 @@ class App extends Component {
         }
       }
     });
-  }
-
-  onAdd = () => {
-    this.setState(({ display, resetDisplay, operands, operators }) => ({
-      operands: !resetDisplay && display !== "-" ? operands.concat(display) : operands,
-      operators: display === "-" || resetDisplay ? ["+"] : operators.concat("+"),
-      resetDisplay: true
-    }));
   }
 
   onDecimal = () => {
@@ -127,7 +112,7 @@ class App extends Component {
   }
 
   render() {
-    const { clear, onDigit, onDivide, onMultiply, onSubtract, onAdd, onDecimal, onEquals } = this;
+    const { clear, onDigit, onOperator, onSubtract, onDecimal, onEquals } = this;
 
     return (
       <div className="App" >
@@ -135,8 +120,8 @@ class App extends Component {
         <div id="display">{this.state.display}</div>
 
         <button id="clear" onClick={clear}>AC</button>
-        <button id="divide" className="operation" onClick={onDivide}>/</button>
-        <button id="multiply" className="operation" onClick={onMultiply}>*</button>
+        <button id="divide" className="operation" onClick={onOperator}>/</button>
+        <button id="multiply" className="operation" onClick={onOperator}>*</button>
 
         <button id="seven" className="digit" onClick={onDigit}>7</button>
         <button id="eight" className="digit" onClick={onDigit}>8</button>
@@ -146,7 +131,7 @@ class App extends Component {
         <button id="four" className="digit" onClick={onDigit}>4</button>
         <button id="five" className="digit" onClick={onDigit}>5</button>
         <button id="six" className="digit" onClick={onDigit}>6</button>
-        <button id="add" className="operation" onClick={onAdd}>+</button>
+        <button id="add" className="operation" onClick={onOperator}>+</button>
 
         <button id="one" className="digit" onClick={onDigit}>1</button>
         <button id="two" className="digit" onClick={onDigit}>2</button>
