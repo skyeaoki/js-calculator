@@ -111,14 +111,18 @@ class App extends Component {
     this.setState(({ display }) => ({
       // If the display does not already contain a "." then concatenate the ".", otherwise return orginal display
       display: display.indexOf(".") === -1 ? display.concat(".") : display,
+      // Do not reset display
       resetDisplay: false
     }));
   }
 
   onEquals = () => {
     this.setState(({ display, operands }) => ({
+      // If display is not "-" then concatenate display to operands array
       operands: display !== "-" ? operands.concat(display) : operands,
+      // Set equals to true
       equals: true,
+      // Reset display
       resetDisplay: true
     }));
   }
