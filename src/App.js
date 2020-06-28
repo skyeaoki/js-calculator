@@ -120,18 +120,18 @@ class App extends Component {
         <div id="display">{this.state.display}</div>
 
         <button id="clear" onClick={clear}>AC</button>
-        <button id="divide" className="operation" onClick={onOperator}>/</button>
-        <button id="multiply" className="operation" onClick={onOperator}>*</button>
+        <button id="divide" className="operator" onClick={onOperator}>/</button>
+        <button id="multiply" className="operator" onClick={onOperator}>*</button>
 
         <button id="seven" className="digit" onClick={onDigit}>7</button>
         <button id="eight" className="digit" onClick={onDigit}>8</button>
         <button id="nine" className="digit" onClick={onDigit}>9</button>
-        <button id="subtract" className="operation" onClick={onSubtract}>-</button>
+        <button id="subtract" className="operator" onClick={onSubtract}>-</button>
 
         <button id="four" className="digit" onClick={onDigit}>4</button>
         <button id="five" className="digit" onClick={onDigit}>5</button>
         <button id="six" className="digit" onClick={onDigit}>6</button>
-        <button id="add" className="operation" onClick={onOperator}>+</button>
+        <button id="add" className="operator" onClick={onOperator}>+</button>
 
         <button id="one" className="digit" onClick={onDigit}>1</button>
         <button id="two" className="digit" onClick={onDigit}>2</button>
